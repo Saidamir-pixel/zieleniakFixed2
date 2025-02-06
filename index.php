@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["timer"])) {
 ?>
 
 
+
 <!DOCTYPE html> 
 <html lang="en">
 <head>
@@ -36,6 +37,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["timer"])) {
         <div class="content">
             <?php
                 if (!isset($_SESSION['email'])) { ?>
+                    <div class="button">
+                        <button id="loginLink" class="bubbly-button">
+                            <a  href="/views/logIn.php">Login</a>
+                        </button>
+                    </div>
+                    <div class="button">
+                        <button id="loginLink" class="bubbly-button">
+                            <a  href="/views/logIn.php">Login</a>
+                        </button>
+                    </div>
+                    <div class="button">
+                        <button id="loginLink" class="bubbly-button">
+                            <a  href="/views/logIn.php">Login</a>
+                        </button>
+                    </div>
                     <div class="button">
                         <button id="loginLink" class="bubbly-button">
                             <a  href="/views/logIn.php">Login</a>
