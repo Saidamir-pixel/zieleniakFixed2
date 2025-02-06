@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: zieleniak-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: zieleniak
+      MYSQL_USER: zieleniak_user
+      MYSQL_PASSWORD: zieleniak_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  php-app:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    container_name: zielenak-php
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: zieleniak
+      DB_USER: zieleniak_user
+      DB_PASS: zieleniak_pass
+    volumes:
+      - .:/var/www/html
+      - /var/lib/php/sessions
+
+  python-app:
+    build:
+      context: .
+      dockerfile: Dockerfile-python
+    container_name: zielenak-python
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_NAME: zieleniak
+      DB_USER: zieleniak_user
+      DB_PASS: zieleniak_pass
+
+volumes:
+  db_data:
+    name: db_data
